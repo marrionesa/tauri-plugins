@@ -1,0 +1,56 @@
+name: Feature request
+description: Suggest a new command, or a new plugin
+title: '[feat]: '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. This repository holds six focused plugins, so
+        the most useful requests describe a gap that cannot be solved in the
+        webview alone.
+
+  - type: input
+    id: plugin
+    attributes:
+      label: Which plugin does this concern?
+      description: An existing plugin, or "a new plugin".
+      placeholder: tauri-plugin-uuid
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the use case, not just the API you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-not-js
+    attributes:
+      label: Why can it not be solved in JavaScript or the webview?
+      description: >
+        This is the important part: these plugins exist to fill gaps the webview
+        cannot. If plain JavaScript already solves it cleanly, that is worth
+        knowing too.
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed API
+      description: Optional. How you would like to call it from JavaScript.
+      render: ts
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds you are using today.
+    validations:
+      required: false

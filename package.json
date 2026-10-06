@@ -1,0 +1,16 @@
+{
+  "name": "tauri-plugins",
+  "private": true,
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "description": "Workspace root: shared tooling for the standalone Tauri v2 plugins.",
+  "scripts": {
+    "build": "pnpm run -r --parallel build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

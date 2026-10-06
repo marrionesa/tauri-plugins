@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
+#
+# Lint: clippy with -D warnings, for every plugin.
+#
+# MANUAL ONLY. The automatic `push` / `pull_request` triggers are intentionally
+# DISABLED so that a push never consumes CI minutes. Start a run by hand from the
+# repository's Actions tab ("Run workflow"), choosing the branch to lint.
+#
+# Because runs are started by hand, there is no path filtering: every run lints
+# all six plugins. If you later re-enable automatic triggers, add a
+# `dorny/paths-filter` step so only the plugins touched by a change are linted.
+#
+# To restore automatic CI later, replace the `on:` block with:
+#
+#   on:
+#     push:
+#       branches: [main]
+#     pull_request:
+
+name: lint-rust
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clippy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: [beep, hash, hostname, mimetype, timezone, uuid]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.90
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tauri-plugin-${{ matrix.plugin }}
+      - run: cargo clippy --package tauri-plugin-${{ matrix.plugin }} --all-targets -- -D warnings
+      - run: cargo clippy --package tauri-plugin-${{ matrix.plugin }} --all-targets --all-features -- -D warnings

@@ -1,0 +1,35 @@
+# Rust
+/target
+Cargo.lock
+
+# JS
+node_modules/
+# NOTE: dist-js/ is intentionally NOT ignored — it is the built JavaScript
+# bundle that `npm publish` must ship (package.json points at ./dist-js/*).
+dist/
+
+# Tauri
+.tauri/
+
+# Editor
+.vs/
+.DS_Store
+.Thumbs.db
+*.sublime*
+.idea/
+debug.log
+.vscode/settings.json
+package-lock.json
+yarn.lock
+# NOTE: _TEMPLATE/ is deliberately NOT ignored — the scaffold is part of this
+# repository and is meant to be shipped (see "Scaffolding a new plugin" in
+# README.md).
+
+# Output of `npm pack`
+*.tgz
+bun.lock
+bun.lockb
+
+# Internal working notes: contains local paths and is not part of the plugin
+# sources. Kept on disk for reference, never committed.
+INFORME-PUBLICACION.md

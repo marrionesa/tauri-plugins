@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-hash-string"
+description = "Enables the hash_string command without any pre-configured scope."
+commands.allow = ["hash_string"]
+
+[[permission]]
+identifier = "deny-hash-string"
+description = "Denies the hash_string command without any pre-configured scope."
+commands.deny = ["hash_string"]

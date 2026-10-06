@@ -1,0 +1,45 @@
+[package]
+name = "tauri-plugin-beep"
+version = "0.1.0"
+description = "Play the system alert sound (Win32 MessageBeep / macOS afplay / Linux paplay) from Rust for Tauri apps."
+authors = ["marrionesa <hola@marioramos.me>"]
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+rust-version = "1.90"
+repository = "https://github.com/marrionesa/tauri-plugins"
+links = "tauri-plugin-beep"
+
+# Exclude JS-only files from the published crate. NOTE: /api-iife.js is NOT
+# excluded — build.rs references it via global_api_script_path(), so it must be
+# present inside the packaged crate.
+exclude = [
+  "/node_modules",
+  "/guest-js",
+  "/dist-js",
+  "/package.json",
+  "/rollup.config.js",
+  "/tsconfig.json",
+  "/banner.png",
+]
+
+# Drives the support-table on https://v2.tauri.app/plugin/
+# Desktop-only: relies on Win32 MessageBeep, macOS `afplay`, Linux `paplay`.
+[package.metadata.platforms.support]
+windows = { level = "full", notes = "Uses Win32 MessageBeep." }
+linux = { level = "partial", notes = "Uses paplay with /usr/share/sounds/freedesktop/stereo/bell.oga; falls back to terminal bell if paplay is missing." }
+macos = { level = "full", notes = "Uses afplay with /System/Library/Sounds/Tink.aiff." }
+android = { level = "none", notes = "No equivalent system alert API on Android." }
+ios = { level = "none", notes = "No equivalent system alert API on iOS." }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+
+[dependencies]
+serde = "1"
+serde_json = "1"
+tauri = "2"
+thiserror = "2"
+
+# Windows-only: the MessageBeep Win32 API
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_UI_WindowsAndMessaging"] }

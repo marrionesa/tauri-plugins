@@ -1,0 +1,27 @@
+SPDXVersion: SPDX-2.1
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: tauri-plugin-hostname
+DocumentNamespace: https://spdx.org/spdxdocs/tauri-plugin-hostname
+Creator: Tool: tauri-plugins-workspace-license-generator
+Created: 2024-01-01T00:00:00Z
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Package
+
+Package: SPDXRef-Package
+PackageName: tauri-plugin-hostname
+PackageVersion: 0.1.0
+PackageDownloadLocation: NOASSERTION
+PackageLicenseDeclared: (Apache-2.0 OR MIT)
+PackageLicenseConcluded: (Apache-2.0 OR MIT)
+PackageLicenseInfoFromFiles: Apache-2.0
+PackageLicenseInfoFromFiles: MIT
+PackageCopyrightText: <text>2019-2024, The Tauri Programme within The Commons Conservancy</text>
+
+License: Apache-2.0
+LicenseName: Apache License 2.0
+LicenseComment: See ./LICENSE_APACHE-2.0 for the full text.
+
+License: MIT
+LicenseName: MIT License
+LicenseComment: See ./LICENSE_MIT for the full text.

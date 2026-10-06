@@ -1,0 +1,59 @@
+# =============================================================================
+# Template Cargo.toml for a Tauri v2 plugin.
+#
+# When you copy this folder to a new plugin:
+#   1. Rename the crate name `tauri-plugin-template` -> `tauri-plugin-<name>`
+#   2. Update `description`, `links`, `repository`, `authors`
+#   3. Edit `[package.metadata.platforms.support]` to reflect reality
+#   4. Add your plugin-specific dependencies below `[dependencies]`
+#   5. Keep the dual Apache-2.0 OR MIT license (Tauri upstream convention)
+# =============================================================================
+
+[package]
+name = "tauri-plugin-template"
+version = "0.1.0"
+description = "REPLACE ME — short one-line description of what this plugin does."
+authors = ["marrionesa <hola@marioramos.me>"]
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+rust-version = "1.90"
+repository = "https://github.com/marrionesa/tauri-plugins"
+links = "tauri-plugin-template"
+
+# Exclude JS-only files from the published crate. NOTE: /api-iife.js is NOT
+# excluded — build.rs references it via global_api_script_path(), so it must be
+# present inside the packaged crate.
+exclude = [
+  "/node_modules",
+  "/guest-js",
+  "/dist-js",
+  "/package.json",
+  "/rollup.config.js",
+  "/tsconfig.json",
+  "/banner.png",
+]
+
+# Drives the support-table on https://v2.tauri.app/plugin/
+# Required by upstream Tauri. Valid levels: "full" | "partial" | "none".
+[package.metadata.platforms.support]
+windows = { level = "full", notes = "" }
+linux = { level = "full", notes = "" }
+macos = { level = "full", notes = "" }
+android = { level = "full", notes = "" }
+ios = { level = "full", notes = "" }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+
+[dependencies]
+serde = "1"
+serde_json = "1"
+tauri = "2"
+thiserror = "2"
+
+# ---- Optional: mobile-only deps ----
+# [target.'cfg(any(target_os = "android", target_os = "ios"))'.dependencies]
+# log = "0.4"
+
+# ---- Optional: extra plugin-specific deps ----
+# uuid = { version = "1", features = ["v4", "v7"] }

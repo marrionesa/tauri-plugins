@@ -1,0 +1,9 @@
+"$schema" = "schemas/schema.json"
+
+# Default permission set enabled when the plugin is added to a Tauri app
+# WITHOUT explicit capability configuration. `hash_string` is safe by default
+# (takes a string, no I/O). `hash_file` reads arbitrary paths the caller passes —
+# restrict via capability if you want to limit file access.
+[default]
+description = "Allow computing SHA-256, SHA-512, and MD5 hashes of strings and files. hash_file reads arbitrary paths the user passes — restrict via capability if you want to limit file access."
+permissions = ["allow-hash-string", "allow-hash-file"]

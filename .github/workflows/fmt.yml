@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
+#
+# Format check: rustfmt + prettier + taplo.
+#
+# Adapted from tauri-apps/plugins-workspace/.github/workflows/fmt.yml (branch v2)
+# but scoped to THIS workspace: the plugin folders live at the repository root
+# (not under plugins/), so the Rust targets are named per crate instead of
+# relying on a `--all` sweep over a monorepo.
+
+name: fmt
+
+# MANUAL ONLY. The automatic `push` / `pull_request` triggers are intentionally
+# DISABLED so that a push never consumes CI minutes. Start a run by hand from
+# the repository's Actions tab ("Run workflow").
+#
+# To restore automatic CI later, replace the block at the bottom of this comment
+# with:
+#
+#   on:
+#     push:
+#       branches: [main]
+#     pull_request:
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rustfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.90
+        with:
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm format:check
+
+  taplo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: taplo-cli
+      - run: taplo fmt --check --diff

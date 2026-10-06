@@ -1,0 +1,46 @@
+[package]
+name = "tauri-plugin-hostname"
+version = "0.1.0"
+description = "Read the system hostname and the current username from Rust for Tauri apps."
+authors = ["marrionesa <hola@marioramos.me>"]
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+rust-version = "1.90"
+repository = "https://github.com/marrionesa/tauri-plugins"
+links = "tauri-plugin-hostname"
+
+# Exclude JS-only files from the published crate. NOTE: /api-iife.js is NOT
+# excluded — build.rs references it via global_api_script_path(), so it must be
+# present inside the packaged crate.
+exclude = [
+  "/node_modules",
+  "/guest-js",
+  "/dist-js",
+  "/package.json",
+  "/rollup.config.js",
+  "/tsconfig.json",
+  "/banner.png",
+]
+
+# Drives the support-table on https://v2.tauri.app/plugin/
+# This plugin is pure-Rust (`gethostname` + `whoami` crates) and works on every
+# Tauri target.
+[package.metadata.platforms.support]
+windows = { level = "full", notes = "Pure Rust — `gethostname` and `whoami` handle platform bindings." }
+linux = { level = "full", notes = "Pure Rust — `gethostname` and `whoami` handle platform bindings." }
+macos = { level = "full", notes = "Pure Rust — `gethostname` and `whoami` handle platform bindings." }
+android = { level = "full", notes = "Pure Rust — `gethostname` and `whoami` handle platform bindings." }
+ios = { level = "full", notes = "Pure Rust — `gethostname` and `whoami` handle platform bindings." }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+
+[dependencies]
+serde = "1"
+serde_json = "1"
+tauri = "2"
+thiserror = "2"
+# Pure-Rust dependencies. `gethostname` wraps libc::gethostname / GetComputerNameW,
+# `whoami` wraps getpwuid_r / GetUserNameW. Both ship platform bindings inline.
+gethostname = "0.5"
+whoami = "1.5"

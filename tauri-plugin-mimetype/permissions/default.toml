@@ -1,0 +1,10 @@
+"$schema" = "schemas/schema.json"
+
+# Default permission set enabled when the plugin is added to a Tauri app
+# WITHOUT explicit capability configuration. Both commands are safe to enable
+# by default: they take a single string argument, perform no I/O (from_path
+# only inspects the string — it does not open the file), and have no side
+# effects.
+[default]
+description = "Allow mapping file extensions and paths to MIME types. Both commands are read-only and perform no I/O — safe to enable by default."
+permissions = ["allow-from-extension", "allow-from-path"]

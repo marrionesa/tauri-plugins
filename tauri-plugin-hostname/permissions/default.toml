@@ -1,0 +1,10 @@
+"$schema" = "schemas/schema.json"
+
+# Default permission set enabled when the plugin is added to a Tauri app
+# WITHOUT explicit capability configuration. Both commands are safe to enable
+# by default: they take no user input, perform no I/O, and have no side effects.
+# NOTE: the hostname is a low-sensitivity identifier but it does reveal machine
+# identity; restrict via capability if you don't want JS to see it.
+[default]
+description = "Allow reading the system hostname and the current username. Both commands are read-only, perform no I/O, and have no side effects — safe to enable by default. NOTE: the hostname is a low-sensitivity identifier but it does reveal machine identity; restrict via capability if you don't want JS to see it."
+permissions = ["allow-hostname", "allow-username"]

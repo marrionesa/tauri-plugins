@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-from-extension"
+description = "Enables the from_extension command without any pre-configured scope."
+commands.allow = ["from_extension"]
+
+[[permission]]
+identifier = "deny-from-extension"
+description = "Denies the from_extension command without any pre-configured scope."
+commands.deny = ["from_extension"]
