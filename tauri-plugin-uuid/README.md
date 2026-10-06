@@ -1,5 +1,11 @@
 # tauri-plugin-uuid
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-uuid.svg)](https://crates.io/crates/tauri-plugin-uuid)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-uuid.svg)](https://docs.rs/tauri-plugin-uuid)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-uuid.svg)](https://www.npmjs.com/package/@marrionesa/plugin-uuid)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-uuid.svg)](https://crates.io/crates/tauri-plugin-uuid)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Generate **v4 and v7 UUIDs** natively from Rust, exposed to JavaScript.
 
 | Platform | Supported |

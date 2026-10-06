@@ -1,5 +1,11 @@
 # tauri-plugin-hash
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-hash.svg)](https://crates.io/crates/tauri-plugin-hash)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-hash.svg)](https://docs.rs/tauri-plugin-hash)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-hash.svg)](https://www.npmjs.com/package/@marrionesa/plugin-hash)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-hash.svg)](https://crates.io/crates/tauri-plugin-hash)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Stream-compute **SHA-256, SHA-512, and MD5** hashes of strings and files from Rust, exposed to JavaScript.
 
 | Platform | Supported |

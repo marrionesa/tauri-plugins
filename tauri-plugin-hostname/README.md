@@ -1,5 +1,11 @@
 # tauri-plugin-hostname
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-hostname.svg)](https://crates.io/crates/tauri-plugin-hostname)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-hostname.svg)](https://docs.rs/tauri-plugin-hostname)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-hostname.svg)](https://www.npmjs.com/package/@marrionesa/plugin-hostname)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-hostname.svg)](https://crates.io/crates/tauri-plugin-hostname)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Read the **system hostname** and the **current username** from Rust, exposed to
 JavaScript.
 

@@ -1,5 +1,11 @@
 # tauri-plugin-timezone
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-timezone.svg)](https://crates.io/crates/tauri-plugin-timezone)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-timezone.svg)](https://docs.rs/tauri-plugin-timezone)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-timezone.svg)](https://www.npmjs.com/package/@marrionesa/plugin-timezone)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-timezone.svg)](https://crates.io/crates/tauri-plugin-timezone)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Read the **system's IANA timezone and the current UTC offset in seconds**, from Rust.
 
 | Platform | Supported |

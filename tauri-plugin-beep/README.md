@@ -1,5 +1,11 @@
 # tauri-plugin-beep
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-beep.svg)](https://crates.io/crates/tauri-plugin-beep)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-beep.svg)](https://docs.rs/tauri-plugin-beep)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-beep.svg)](https://www.npmjs.com/package/@marrionesa/plugin-beep)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-beep.svg)](https://crates.io/crates/tauri-plugin-beep)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Play the **system alert sound** on Windows, macOS, and Linux from Rust.
 
 | Platform | Supported                                                      |

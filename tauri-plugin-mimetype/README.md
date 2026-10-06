@@ -1,5 +1,11 @@
 # tauri-plugin-mimetype
 
+[![crates.io](https://img.shields.io/crates/v/tauri-plugin-mimetype.svg)](https://crates.io/crates/tauri-plugin-mimetype)
+[![docs.rs](https://img.shields.io/docsrs/tauri-plugin-mimetype.svg)](https://docs.rs/tauri-plugin-mimetype)
+[![npm](https://img.shields.io/npm/v/@marrionesa%2Fplugin-mimetype.svg)](https://www.npmjs.com/package/@marrionesa/plugin-mimetype)
+[![downloads](https://img.shields.io/crates/d/tauri-plugin-mimetype.svg)](https://crates.io/crates/tauri-plugin-mimetype)
+[![license](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](#license)
+
 Map a file extension or file path to a MIME type, using the pure-Rust [`mime_guess`](https://crates.io/crates/mime_guess) crate.
 
 | Platform | Supported |

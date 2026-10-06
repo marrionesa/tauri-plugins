@@ -1,0 +1,11 @@
+# Normalise line endings so Windows contributors do not rewrite the whole tree.
+* text=auto eol=lf
+
+# The built JavaScript is committed on purpose: `npm publish` must ship
+# `dist-js/`. Tell GitHub's language statistics to treat it as normal source
+# rather than as generated or vendored code.
+tauri-plugin-*/dist-js/** linguist-generated=false
+tauri-plugin-*/dist-js/** linguist-vendored=false
+
+# Lock files should not count towards the language bar.
+Cargo.lock linguist-generated=true
