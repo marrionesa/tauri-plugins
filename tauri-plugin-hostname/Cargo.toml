@@ -42,5 +42,5 @@ tauri = "2"
 thiserror = "2"
 # Pure-Rust dependencies. `gethostname` wraps libc::gethostname / GetComputerNameW,
 # `whoami` wraps getpwuid_r / GetUserNameW. Both ship platform bindings inline.
-gethostname = "0.5"
-whoami = "1.5"
+gethostname = "1.1"
+whoami = "2.1"
