@@ -42,4 +42,4 @@ thiserror = "2"
 
 # Windows-only: the MessageBeep Win32 API
 [target.'cfg(target_os = "windows")'.dependencies]
-windows-sys = { version = "0.59", features = ["Win32_UI_WindowsAndMessaging"] }
+windows-sys = { version = "0.61", features = ["Win32_UI_WindowsAndMessaging"] }
