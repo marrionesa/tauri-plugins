@@ -35,8 +35,8 @@ jobs:
       matrix:
         plugin: [beep, hash, hostname, mimetype, timezone, uuid]
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.90
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120
         with:
           components: clippy
       - uses: Swatinem/rust-cache@v2

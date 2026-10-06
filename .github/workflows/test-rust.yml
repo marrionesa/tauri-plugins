@@ -40,8 +40,8 @@ jobs:
         plugin: [beep, hash, hostname, mimetype, timezone, uuid]
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.90
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: tauri-plugin-${{ matrix.plugin }}
@@ -61,8 +61,8 @@ jobs:
           - os: ubuntu-latest
             target: aarch64-linux-android
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.90
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.120
         with:
           targets: ${{ matrix.target }}
       - uses: Swatinem/rust-cache@v2
