@@ -1,86 +1,34 @@
-# Keeps dependencies and GitHub Actions up to date.
+# Dependency monitoring.
 #
-# Grouped so that a routine bump is a single pull request per ecosystem instead
-# of one PR per dependency. The plugin crates intentionally pin `tauri = "2"`,
-# so patch and minor updates of the Tauri stack arrive together.
+# Deliberately conservative: this repository keeps its dependencies under manual
+# review, so Dependabot does NOT open pull requests on its own.
+#
+#   - GitHub Actions is the one ecosystem checked automatically. It only touches
+#     the workflow files (not the published crates or npm packages), and the
+#     check is monthly.
+#   - The cargo and npm ecosystems are intentionally NOT listed. The plugins pin
+#     `tauri = "2"` and `@tauri-apps/api ^2.0.0` on purpose, and bumping them
+#     means re-running the full test matrix and republishing both halves of a
+#     plugin, which is a deliberate decision rather than a routine update.
+#     To review them on demand, run locally:
+#
+#       cargo update --workspace --dry-run
+#       cargo outdated --workspace          # needs: cargo install cargo-outdated
+#       npm outdated                        # inside a plugin directory
+#
+# To make Dependabot suggest cargo/npm bumps again, add `cargo` entries with
+# `open-pull-requests-limit: 0` (reports without opening PRs) or raise the limit.
+#
+# Note: Dependabot's own runs are free — they do not consume Actions minutes on
+# public repositories.
+
 version: 2
 updates:
-  # Rust: one entry per plugin, because each one is its own crate.
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-beep
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-hash
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-hostname
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-mimetype
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-timezone
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  - package-ecosystem: cargo
-    directory: /tauri-plugin-uuid
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      cargo:
-        patterns: ['*']
-
-  # The plugin directories are also npm packages.
-  - package-ecosystem: npm
-    directories:
-      - /tauri-plugin-beep
-      - /tauri-plugin-hash
-      - /tauri-plugin-hostname
-      - /tauri-plugin-mimetype
-      - /tauri-plugin-timezone
-      - /tauri-plugin-uuid
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-    groups:
-      npm:
-        patterns: ['*']
-
-  # GitHub Actions used by the workflows.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    open-pull-requests-limit: 2
     groups:
       actions:
         patterns: ['*']
