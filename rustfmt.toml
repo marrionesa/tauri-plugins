@@ -1,0 +1,8 @@
+# rustfmt configuration.
+#
+# Kept deliberately minimal: this mirrors the upstream `tauri-apps/plugins-workspace`
+# convention of using stock rustfmt defaults, so that `cargo fmt --all -- --check`
+# in CI matches what a contributor's local `cargo fmt` produces.
+#
+# Add project-wide overrides (e.g. `max_width`, `imports_granularity`) here rather
+# than per-crate `#[rustfmt::skip]` attributes.

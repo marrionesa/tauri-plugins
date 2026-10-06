@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: MIT
+//
+// Includes the Tauri Android runtime library. Mirrors the upstream scaffolded
+// `android/settings.gradle` from the Tauri CLI plugin template.
+
+rootProject.name = "tauri-plugin-template"
+
+include(":tauri-android")
+project(":tauri-android").projectDir = file(".tauri/tauri-api")

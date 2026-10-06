@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
+#
+# Mirror builder (OPTIONAL, manual only).
+#
+# Purpose: if you prefer one repository per plugin, this workflow prepares a
+# ready-to-push mirror of each `tauri-plugin-<name>/` folder and uploads them as
+# workflow artefacts. It performs NO push and needs NO credentials — you
+# download the artefact and push it yourself, so nothing happens to any remote
+# repository without your explicit action.
+#
+# Alternatively, for a single mirror you can do it locally in three commands:
+#
+#   git subtree split --prefix=tauri-plugin-uuid -b mirror-uuid
+#   git clone . /tmp/uuid && cd /tmp/uuid && git push <your-remote> mirror-uuid:main
+#
+# The generated mirror contains the folder CONTENTS at its root (not the folder
+# itself), which is what a standalone plugin repository expects. The root-level
+# workspace files (Cargo.toml, pnpm-workspace.yaml, .github/) are NOT copied:
+# a standalone plugin repo needs its own, and the crate works fine without them.
+#
+# Nothing here publishes to crates.io or npm — that is manual, see
+# INFORME-PUBLICACION.md.
+
+name: mirror
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin:
+        description: 'Plugin to mirror: beep | hash | hostname | mimetype | timezone | uuid | all'
+        required: true
+        default: 'all'
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build standalone mirror trees
+        run: |
+          set -euo pipefail
+          mkdir -p mirrors
+          for d in tauri-plugin-*/; do
+            name="${d%/}"
+            plugin="${name#tauri-plugin-}"
+            if [ "${{ inputs.plugin }}" != "all" ] && [ "${{ inputs.plugin }}" != "${plugin}" ]; then
+              continue
+            fi
+            echo "::group::Preparing mirror for ${name}"
+            mkdir -p "mirrors/${name}"
+            rsync -a --exclude='target' --exclude='node_modules' "${d}" "mirrors/${name}/"
+            echo "::endgroup::"
+          done
+          echo "Prepared:"
+          ls -1 mirrors
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plugin-mirrors
+          path: mirrors/
+          retention-days: 7

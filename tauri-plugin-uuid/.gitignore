@@ -1,0 +1,26 @@
+# Rust
+/target
+Cargo.lock
+
+# JS
+node_modules/
+# NOTE: dist-js/ is intentionally NOT ignored — it is the built JavaScript
+# bundle that `npm publish` must ship (package.json points at ./dist-js/*).
+dist/
+
+# Tauri
+.tauri/
+
+# Editor
+.vs/
+.DS_Store
+.Thumbs.db
+*.sublime*
+.idea/
+debug.log
+.vscode/settings.json
+package-lock.json
+yarn.lock
+
+# Output of `npm pack`
+*.tgz

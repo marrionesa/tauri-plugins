@@ -1,0 +1,37 @@
+# Workspace root for the standalone Tauri v2 plugins maintained by @marrionesa.
+#
+# Each plugin publishes independently to crates.io, but they share this
+# workspace so that `cargo fmt --all`, `cargo clippy --workspace`,
+# `cargo test --workspace` and a single lock file work as the CI workflows
+# expect.
+#
+# NOTE: this file is intentionally NOT published — only the individual
+# tauri-plugin-<name> crates are.
+
+[workspace]
+resolver = "2"
+members = [
+  "tauri-plugin-beep",
+  "tauri-plugin-hash",
+  "tauri-plugin-hostname",
+  "tauri-plugin-mimetype",
+  "tauri-plugin-timezone",
+  "tauri-plugin-uuid",
+]
+# `_TEMPLATE` is deliberately excluded: it is a copy-and-rename scaffold with
+# placeholder metadata, not a publishable crate.
+exclude = ["_TEMPLATE"]
+
+[workspace.package]
+authors = ["marrionesa <hola@marioramos.me>"]
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/marrionesa/tauri-plugins"
+rust-version = "1.90"
+
+[workspace.dependencies]
+serde = "1"
+serde_json = "1"
+tauri = "2"
+tauri-plugin = { version = "2", features = ["build"] }
+thiserror = "2"

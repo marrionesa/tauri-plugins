@@ -1,0 +1,7 @@
+packages:
+  - tauri-plugin-beep
+  - tauri-plugin-hash
+  - tauri-plugin-hostname
+  - tauri-plugin-mimetype
+  - tauri-plugin-timezone
+  - tauri-plugin-uuid

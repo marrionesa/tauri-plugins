@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jbolda/covector/main/config.schema.json",
+  "pkgManagers": {
+    "javascript": {
+      "version": true,
+      "getPublishedVersion": "npm view ${ pkgFile.pkg.name } version",
+      "prepublish": [
+        {
+          "command": "pnpm build",
+          "dryRun": false,
+          "shell": "true",
+          "stepName": "build guest-js → dist-js"
+        }
+      ],
+      "publish": [
+        {
+          "command": "npm publish --access public",
+          "dryRun": false,
+          "shell": "true",
+          "stepName": "publish to npmjs.com"
+        }
+      ]
+    },
+    "rust": {
+      "version": true,
+      "getPublishedVersion": "cargo search ${ pkgFile.pkg.name } 2>/dev/null | head -n 1 | cut -d '\"' -f 2",
+      "publish": [
+        {
+          "command": "cargo publish",
+          "dryRun": false,
+          "shell": "true",
+          "stepName": "publish to crates.io"
+        }
+      ]
+    }
+  },
+  "packages": {
+    "tauri-plugin-beep": {
+      "path": "./tauri-plugin-beep",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "beep-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-beep version ${ pkgFile.version } && git commit -am \"chore(beep): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-beep-js": {
+      "path": "./tauri-plugin-beep",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "beep-js-v"
+    },
+    "tauri-plugin-hash": {
+      "path": "./tauri-plugin-hash",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "hash-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-hash version ${ pkgFile.version } && git commit -am \"chore(hash): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-hash-js": {
+      "path": "./tauri-plugin-hash",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "hash-js-v"
+    },
+    "tauri-plugin-hostname": {
+      "path": "./tauri-plugin-hostname",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "hostname-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-hostname version ${ pkgFile.version } && git commit -am \"chore(hostname): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-hostname-js": {
+      "path": "./tauri-plugin-hostname",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "hostname-js-v"
+    },
+    "tauri-plugin-mimetype": {
+      "path": "./tauri-plugin-mimetype",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "mimetype-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-mimetype version ${ pkgFile.version } && git commit -am \"chore(mimetype): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-mimetype-js": {
+      "path": "./tauri-plugin-mimetype",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "mimetype-js-v"
+    },
+    "tauri-plugin-timezone": {
+      "path": "./tauri-plugin-timezone",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "timezone-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-timezone version ${ pkgFile.version } && git commit -am \"chore(timezone): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-timezone-js": {
+      "path": "./tauri-plugin-timezone",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "timezone-js-v"
+    },
+    "tauri-plugin-uuid": {
+      "path": "./tauri-plugin-uuid",
+      "manager": "rust",
+      "dependencies": [],
+      "version": true,
+      "tag": "uuid-v",
+      "postversion": "pnpm --filter @marrionesa/plugin-uuid version ${ pkgFile.version } && git commit -am \"chore(uuid): bump js to ${ pkgFile.version }\""
+    },
+    "tauri-plugin-uuid-js": {
+      "path": "./tauri-plugin-uuid",
+      "manager": "javascript",
+      "dependencies": [],
+      "version": true,
+      "tag": "uuid-js-v"
+    }
+  }
+}

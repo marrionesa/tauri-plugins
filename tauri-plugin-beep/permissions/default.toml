@@ -1,0 +1,11 @@
+"$schema" = "schemas/schema.json"
+
+# Default permission set enabled when the plugin is added to a Tauri app
+# WITHOUT explicit capability configuration. The `beep` command takes no user
+# input and has no I/O side effects beyond playing a short OS-supplied sound —
+# safe to enable by default on desktop platforms. On mobile the command will
+# return an `UnsupportedPlatform` error, but it is still safe to *enable* the
+# permission (the call simply fails at runtime if invoked).
+[default]
+description = "Allow playing the system alert sound. The beep command takes no input and has no I/O side effects beyond playing a short OS-supplied sound — safe to enable by default on desktop platforms."
+permissions = ["allow-beep"]

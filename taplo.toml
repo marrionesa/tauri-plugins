@@ -1,0 +1,23 @@
+# taplo configuration — formatter for the TOML files in this repository
+# (Cargo.toml manifests and permissions/*.toml).
+#
+# `taplo fmt --check --diff` runs in CI (.github/workflows/fmt.yml).
+# Run `taplo fmt` locally to apply the same formatting.
+
+include = ["**/*.toml"]
+
+exclude = [
+  # Build output, never committed.
+  "**/target/**",
+  "**/node_modules/**",
+]
+
+[formatting]
+align_entries = false
+array_auto_collapse = true
+array_auto_expand = true
+column_width = 100
+indent_tables = false
+# Keep dependency/array order exactly as written: reordering would rewrite
+# `exclude`, `features` and `members` lists on every run.
+reorder_arrays = false

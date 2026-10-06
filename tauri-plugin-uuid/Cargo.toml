@@ -1,0 +1,43 @@
+[package]
+name = "tauri-plugin-uuid"
+version = "0.1.0"
+description = "Generate v4 and v7 UUIDs natively from Rust for Tauri apps."
+authors = ["marrionesa <hola@marioramos.me>"]
+license = "Apache-2.0 OR MIT"
+edition = "2021"
+rust-version = "1.90"
+repository = "https://github.com/marrionesa/tauri-plugins"
+links = "tauri-plugin-uuid"
+
+# Exclude JS-only files from the published crate. NOTE: /api-iife.js is NOT
+# excluded — build.rs references it via global_api_script_path(), so it must be
+# present inside the packaged crate.
+exclude = [
+  "/node_modules",
+  "/guest-js",
+  "/dist-js",
+  "/package.json",
+  "/rollup.config.js",
+  "/tsconfig.json",
+  "/banner.png",
+]
+
+# Drives the support-table on https://v2.tauri.app/plugin/
+# This plugin is pure-Rust (`uuid` crate) and works on every Tauri target.
+[package.metadata.platforms.support]
+windows = { level = "full", notes = "Pure Rust — no platform bindings." }
+linux = { level = "full", notes = "Pure Rust — no platform bindings." }
+macos = { level = "full", notes = "Pure Rust — no platform bindings." }
+android = { level = "full", notes = "Pure Rust — no platform bindings." }
+ios = { level = "full", notes = "Pure Rust — no platform bindings." }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+
+[dependencies]
+serde = "1"
+serde_json = "1"
+tauri = "2"
+thiserror = "2"
+# Single pure-Rust dependency with no_std support, no native bindings.
+uuid = { version = "1.15", features = ["v4", "v7"] }

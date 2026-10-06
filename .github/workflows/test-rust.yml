@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
+#
+# Test: builds and tests every plugin on Linux, Windows and macOS.
+#
+# MANUAL ONLY. The automatic `push` / `pull_request` triggers are intentionally
+# DISABLED so that a push never consumes CI minutes. Start a run by hand from the
+# repository's Actions tab ("Run workflow").
+#
+# Because runs are started by hand, there is no path filtering: every run tests
+# all six plugins. That is the point of running it manually before a release.
+#
+# The mobile targets only compile the crate against an Android/iOS target and are
+# marked `continue-on-error`: they need the Android NDK / iOS SDK, which the
+# runners only set up correctly with extra tooling. They are a smoke check, not a
+# gate.
+#
+# To restore automatic CI later, replace the `on:` block with:
+#
+#   on:
+#     push:
+#       branches: [main]
+#     pull_request:
+
+name: test-rust
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: [beep, hash, hostname, mimetype, timezone, uuid]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.90
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tauri-plugin-${{ matrix.plugin }}
+      - run: cargo test --package tauri-plugin-${{ matrix.plugin }}
+      - run: cargo build --package tauri-plugin-${{ matrix.plugin }} --release
+
+  build-mobile:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: [beep, hash, hostname, mimetype, timezone, uuid]
+        include:
+          - os: macos-latest
+            target: aarch64-apple-ios
+          - os: ubuntu-latest
+            target: aarch64-linux-android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.90
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tauri-plugin-${{ matrix.plugin }}
+      - run: cargo build --package tauri-plugin-${{ matrix.plugin }} --target ${{ matrix.target }}
